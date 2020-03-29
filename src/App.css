@@ -1,6 +1,6 @@
 .App {
   min-height: 100vh;
-  display: flex;
+  /* display: flex; */
   justify-content: space-around;
   align-items: center;
 }
