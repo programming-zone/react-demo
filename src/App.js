@@ -1,45 +1,53 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import Tweet from './Tweet';
+import NavBar from './navbar';
+import Counters from './Counters';
 
-// const sayHello =  () => {
-//   console.log("Hello");
-// };
+class App extends Component {
+  state = { 
+    counters: [
+      { id: 1, value: 4 },
+      { id: 2, value: 0 },
+      { id: 3, value: 0 },
+      { id: 4, value: 0 },
+    ]
+   }
+   handleIncrement = (counter) => {
+     const counters =[...this.state.counters];
+     const index = counters.indexOf(counter);
+     counters[index] = {...counter};
+     counters[index].value++;
+     this.setState({counters});
+   };
+   handleReset = () => {
+     const counters = this.state.counters.map(c => {
+       c.value =0;
+       return c;
+     });
+     this.setState({counters});
+   };
 
-function App() {
-  // const [count,setCount] = useState(0);
-  // const [isRed,setRed] =useState(false);
+   handleDelete = (counterId) => {
+     const counters = this.state.counters.filter(c => c.id !== counterId);
+     this.setState({counters});
+   };
 
-  // const increase = () => {
-  //   setCount(count+1);  
-  //   setRed(!isRed);
-  // };
-  // const reset = () => {
-  //   setCount(0);
-  // };
-  const [users, setUsers] = useState([
-    {name: "Injamul", message: "Hi there", likes: "4k"},
-    {name: "Injamul", message: "Hi there", likes: "4k"},
-    {name: "Injamul", message: "Hi there", likes: "4k"},
-    {name: "Injamul", message: "Hi there", likes: "4k"},
-  ]);
-  
-
-  return (
-    <div className="App">
-      {/* <Tweet name="Injamul" message="first post." likes="100" />
-      <Tweet name="Injamul" message="first post." likes="100" />
-      <Tweet name="Injamul" message="first post." likes="100" />
-      <Tweet name="Injamul" message="first post." likes="100" /> */}
-      {/* <h1 className={isRed ? "red" : ""}>{count}</h1>
-      <button onClick={increase}>Increase</button>
-      <button onClick={reset}>reset</button> */}
-      {users.map(user => (
-        <Tweet name={user.name} message={user.message} likes={user.likes} />
-      ))}
-      
-    </div>
-  );
+  render() { 
+    return (
+      <React.Fragment>
+      <NavBar 
+      totalCounters = {this.state.counters.filter(c=> c.value > 0).length} 
+       />
+      <main className="container">
+        <Counters 
+        counters={this.state.counters}
+        onReset={this.handleReset}
+        onIncrement={this.handleIncrement}
+        onDelete={this.handleDelete} />
+      </main>
+      </React.Fragment> 
+     );
+  }
 }
-
+ 
 export default App;
