@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from 'react';
 import './App.css';
 import NavBar from './navbar';
@@ -48,6 +49,20 @@ class App extends Component {
       </React.Fragment> 
      );
   }
+=======
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+function App() {
+  return (
+    <div className="App">
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+    </div>
+  );
+>>>>>>> 249e4d0611a6ba1c703a9eeb18279da3d64ce289
 }
  
 export default App;
